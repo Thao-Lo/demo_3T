@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.demo3T.entity.Category;
@@ -15,26 +16,32 @@ import project.demo3T.repository.CategoryRepository;
 import project.demo3T.repository.ProductRepository;
 
 @Controller
-
 public class HomeController {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	private ProductRepository productRespository;
 
 	@GetMapping("/")
-	public String getAllCategories(Model model) {
+	public String getAllCategories(@RequestParam(required = false) Integer categoryId,
+			@RequestParam(required = false) String action, Model model) {
 		List<Category> categories = categoryRepository.findAll();
-		List<Product> products = productRespository.findAll();		
-		
-		model.addAttribute("categories", categories);
+		List<Product> products;
+
+		if ("SHOW_PRODUCT_BY_CATEGORY".equals(action) && categoryId != 0) {
+            products = productRespository.findProductByCategoryId(categoryId);
+        }  else if (("SHOW_ALL").equals(action)) {
+			products = productRespository.findAll();
+		} else {
+			products = productRespository.findAll();
+		}
+		model.addAttribute("allCategory", categories);
 		model.addAttribute("products", products);
 //		System.out.println(categories);
 		return "index";
 	}
-	
 
 	@GetMapping("/hello")
 	public String hello(Model model) {
@@ -48,13 +55,12 @@ public class HomeController {
 		return "I'm tired Hello Thao Lo";
 	}
 
-	
 //	@GetMapping("/")
 //	public String welcome(Model model) {	
 //		return "index";
 //
 //	}	
-	
+
 //	    @GetMapping("/categories")
 //	    public String getAllCategories(Model model) {
 //	    	List<Category> categories = categoryRepository.findAll();

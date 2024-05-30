@@ -34,12 +34,15 @@
 		<i class="fa-solid fa-bars me-3 hambuger-icon"></i>
 		<p class="mb-0 fs-5 menu-nav-brand">All-In Small</p>
 	</nav>
+	
 	<section id="categories">
 		<ul class="nav category-section ms-2">
-			<c:forEach items="${categories}" var="category">
-				<li class="nav-item"><a class="nav-link" href="">${category.name}</a></li>
+			<c:forEach items="${allCategory}" var="category">
+				<li class="nav-item"><a class="nav-link" href="?action=SHOW_PRODUCT_BY_CATEGORY&categoryId=${category.id}">${category.name}</a></li>
 
 			</c:forEach>
+			
+			<li class="nav-item"><a class="nav-link" href="?action=SHOW_ALL">All</a></li>
 			<li class="nav-item"><a class="nav-link" href="">+</a></li>
 		</ul>
 
