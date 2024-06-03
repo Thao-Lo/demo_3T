@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import project.demo3T.entity.Category;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 	//entity class + datatype of Id
 	
 }

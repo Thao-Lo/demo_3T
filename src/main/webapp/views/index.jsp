@@ -51,7 +51,7 @@
 	<section class="product-section">
 		<c:forEach items="${products}" var="product">
 			<div class="product-container">
-				<img src="/assets/food-avatar/banhmi.jpg" alt="">
+				<img src="?productId=${product.id}" alt="">
 				<div class="product-details">
 					<div class="product-name">${product.name}</div>
 					<div class="product-price">$${product.price}</div>
@@ -59,7 +59,7 @@
 				<div class="product-quantity">
 					<input type="button" value="-" class="button-minus "
 						data-field="quantity"> <input type="number" step="1"
-						min="0" value="1" name="quantity"
+						min="0" value="0" name="quantity"
 						class="quantity-field text-center"> <input type="button"
 						value="+" class="button-plus" data-field="quantity">
 				</div>
